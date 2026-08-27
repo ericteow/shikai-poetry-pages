@@ -23,7 +23,7 @@ button { color: inherit; font: inherit; }
 .header-center span, .feed-count, .side-label, .poem-meta span, .feed-footer { color: var(--muted); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
 .circle-button, .more-button { background: transparent; border: 0; cursor: pointer; }
 .search-area { align-items: center; display: flex; gap: 10px; }
-.search-strip { align-items: center; background: rgba(245,241,233,.72); border-bottom: 1px solid rgba(217,223,213,.8); display: flex; justify-content: flex-end; padding: 10px 5vw; }
+.search-strip { align-items: center; background: rgba(245,241,233,.72); display: flex; justify-content: flex-end; padding: 10px 5vw; }
 .search-input { background: var(--card); border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-size: 12px; outline: none; padding: 10px 14px; width: 190px; }
 .search-input:focus { border-color: var(--accent); }
 .circle-button { border: 1px solid #9ba99d; border-radius: 50%; color: var(--ink); font-size: 24px; height: 38px; line-height: 1; width: 38px; }

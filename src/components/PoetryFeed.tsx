@@ -45,6 +45,7 @@ export default function PoetryFeed({ poems }: PoetryFeedProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const lastWheelRef = useRef(0);
+  const touchStartYRef = useRef<number | null>(null);
 
   const months = useMemo(() => ["全部", ...Array.from(new Set(poems.map((poem) => poem.date.slice(0, 7))))], [poems]);
   const filteredPoems = poems.filter((poem) => {
@@ -238,6 +239,16 @@ export default function PoetryFeed({ poems }: PoetryFeedProps) {
           aria-modal="true"
           aria-label="图片浏览器"
           onClick={() => setActiveImageIndex(null)}
+          onTouchStart={(event) => {
+            touchStartYRef.current = event.touches[0]?.clientY ?? null;
+          }}
+          onTouchEnd={(event) => {
+            const startY = touchStartYRef.current;
+            const endY = event.changedTouches[0]?.clientY;
+            touchStartYRef.current = null;
+            if (startY === null || endY === undefined || Math.abs(endY - startY) < 50) return;
+            setActiveImageIndex((index) => index === null ? null : Math.max(0, Math.min(filteredPoems.length - 1, index + (endY < startY ? 1 : -1))));
+          }}
           onWheel={(event) => {
             const now = Date.now();
             if (now - lastWheelRef.current < 450 || Math.abs(event.deltaY) < 12) return;
