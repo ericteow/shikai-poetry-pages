@@ -28,7 +28,8 @@ button { color: inherit; font: inherit; }
 .search-input:focus { border-color: var(--accent); }
 .circle-button { border: 1px solid #9ba99d; border-radius: 50%; color: var(--ink); font-size: 24px; height: 38px; line-height: 1; width: 38px; }
 .feed-layout { display: grid; gap: 6vw; grid-template-columns: 180px minmax(420px, 680px) 180px; margin: 0 auto; max-width: 1260px; padding: 88px 5vw 100px; }
-.feed-sidebar, .feed-right { padding-top: 12px; }
+.feed-sidebar, .feed-right { align-self: start; padding-top: 12px; position: sticky; top: 112px; }
+.feed-sidebar { position: static; }
 .side-label, .kicker { margin: 0 0 20px; }
 .feed-sidebar > .side-label { color: var(--ink); font-size: 17px; letter-spacing: .08em; }
 .month-list { display: grid; gap: 7px; }
