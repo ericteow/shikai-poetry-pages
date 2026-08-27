@@ -1,0 +1,28 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^ollama pull qwen3-coder:30b$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^code --install-extension saoudrizwan\\.claude-dev$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^\"/Applications/Visual Studio Code\\.app/Contents/Resources/app/bin/code\" --install-extension saoudrizwan\\.claude-dev$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^\"/Applications/Visual Studio Code\\.app/Contents/Resources/app/bin/code\" --list-extensions \\| rg '\\^saoudrizwan\\\\\\.claude-dev\\$'$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^\"/Applications/Visual Studio Code\\.app/Contents/Resources/app/bin/code\" --list-extensions \\| grep '\\^saoudrizwan\\\\\\.claude-dev\\$'$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^npx eslint src/app/page\\.tsx src/components/PoetryFeed\\.tsx$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
