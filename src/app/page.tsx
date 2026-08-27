@@ -12,10 +12,11 @@ async function getImages(folder: string): Promise<string[]> {
 }
 
 export default async function Home() {
-  const files = (await getImages(path.join(process.cwd(), "images"))).sort().reverse();
+  const imageDirectory = path.join(process.cwd(), "public", "images");
+  const files = (await getImages(imageDirectory)).sort().reverse();
   const poems: Poem[] = files.map((file) => ({
     id: file,
-    image: `/images/${path.relative(path.join(process.cwd(), "images"), file).split(path.sep).map(encodeURIComponent).join("/")}`,
+    image: `/images/${path.relative(imageDirectory, file).split(path.sep).map(encodeURIComponent).join("/")}`,
     title: "诗页",
     date: path.basename(file).match(/(\d{4}-\d{2}-\d{2})/)?.[1] ?? "未注明日期",
   }));
