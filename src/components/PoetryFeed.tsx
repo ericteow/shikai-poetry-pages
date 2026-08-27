@@ -42,6 +42,7 @@ export default function PoetryFeed({ poems }: PoetryFeedProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [showSavedOnly, setShowSavedOnly] = useState(false);
   const [showAuthor, setShowAuthor] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
   const lastWheelRef = useRef(0);
 
@@ -122,16 +123,19 @@ export default function PoetryFeed({ poems }: PoetryFeedProps) {
     setShowSavedOnly(false);
     setSearchQuery("");
     setSearchOpen(false);
+    setMobileMenuOpen(false);
     setVisibleCount(PAGE_SIZE);
     document.getElementById("top")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   function toggleAuthor() {
     setShowAuthor((isOpen) => !isOpen);
+    setMobileMenuOpen(false);
   }
 
   function selectSaved() {
     setShowSavedOnly(true);
+    setMobileMenuOpen(false);
     setVisibleCount(PAGE_SIZE);
     document.querySelector(".feed-column")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -152,16 +156,19 @@ export default function PoetryFeed({ poems }: PoetryFeedProps) {
     <main className="poetry-app">
       <header className="feed-header">
         <a className="wordmark" href="#top" aria-label="回到歲月見心錄首页"><span className="logo-mark"><Image src="/Logo-transparent.png" alt="歲月見心錄标志" width={1280} height={1192} /></span><strong>《歲月見心錄》<small>一日一觀，一念一見</small></strong></a>
-        <nav className="header-nav" aria-label="主导航">
+        <nav className={`header-nav ${mobileMenuOpen ? "open" : ""}`} aria-label="主导航">
           <button className={!showSavedOnly ? "active" : ""} type="button" onClick={selectHome}>主页</button>
           <button className={showSavedOnly ? "active" : ""} type="button" onClick={selectSaved}>收藏夹</button>
           <button className={showAuthor ? "active" : ""} type="button" onClick={toggleAuthor}>作者</button>
         </nav>
+        <button className="mobile-menu-toggle" type="button" aria-label={mobileMenuOpen ? "关闭菜单" : "打开菜单"} aria-expanded={mobileMenuOpen} onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}>☰</button>
+      </header>
+      <div className="search-strip">
         <div className="search-area">
           {searchOpen && <input className="search-input" type="search" value={searchQuery} onChange={(event) => { setSearchQuery(event.target.value); setVisibleCount(PAGE_SIZE); }} placeholder="搜索日期或诗名" aria-label="搜索日期或诗名" autoFocus />}
           <button className="circle-button" type="button" aria-label={searchOpen ? "关闭搜索" : "搜索"} aria-expanded={searchOpen} onClick={toggleSearch}>⌕</button>
         </div>
-      </header>
+      </div>
 
       <div className="feed-layout" id="top">
         <aside className="feed-sidebar">
