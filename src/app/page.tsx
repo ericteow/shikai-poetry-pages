@@ -19,7 +19,11 @@ export default async function Home() {
     image: `/images/${path.relative(imageDirectory, file).split(path.sep).map(encodeURIComponent).join("/")}`,
     title: "诗页",
     date: path.basename(file).match(/(\d{4}-\d{2}-\d{2})/)?.[1] ?? "未注明日期",
-  }));
+  })).sort((first, second) => {
+    if (first.date === "未注明日期") return 1;
+    if (second.date === "未注明日期") return -1;
+    return second.date.localeCompare(first.date);
+  });
 
   return <PoetryFeed poems={poems} />;
 }

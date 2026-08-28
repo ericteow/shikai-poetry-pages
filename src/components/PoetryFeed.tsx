@@ -47,7 +47,15 @@ export default function PoetryFeed({ poems }: PoetryFeedProps) {
   const lastWheelRef = useRef(0);
   const touchStartYRef = useRef<number | null>(null);
 
-  const months = useMemo(() => ["全部", ...Array.from(new Set(poems.map((poem) => poem.date.slice(0, 7))))], [poems]);
+  const months = useMemo(() => {
+    const monthSet = new Set(poems.map((poem) => poem.date.slice(0, 7)));
+    const sortedMonths = Array.from(monthSet).sort((first, second) => {
+      if (first === "未注明") return 1;
+      if (second === "未注明") return -1;
+      return second.localeCompare(first);
+    });
+    return ["全部", ...sortedMonths];
+  }, [poems]);
   const filteredPoems = poems.filter((poem) => {
     const matchesMonth = activeMonth === "全部" || poem.date.startsWith(activeMonth);
     const query = searchQuery.trim().toLowerCase();
