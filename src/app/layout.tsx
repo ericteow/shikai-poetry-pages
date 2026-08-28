@@ -15,6 +15,10 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "诗页 | 每日一页，慢慢读",
   description: "一张照片，一首还没说完的诗。",
+  icons: {
+    icon: "/Logo-transparent.png",
+    apple: "/Logo-transparent.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
